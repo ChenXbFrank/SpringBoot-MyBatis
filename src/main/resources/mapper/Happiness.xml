@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cxb.sbm.dao.HappinessDao">
+    <!--根据名字查询单个对象-->
+    <select id="findHappinessByCityXml" parameterType="String" resultType="com.cxb.sbm.model.Happiness">
+        SELECT * FROM happiness WHERE city = #{city}
+    </select>
+
+    <!--插入一个对象-->
+    <insert id="insertHappinessXml" parameterType="HashMap" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO happiness(city, num) VALUES(#{city}, #{num})
+    </insert>
+
+    <!--这是返回的集合的属性-->
+    <resultMap id="cityBaseMap" type="com.cxb.sbm.model.Happiness">
+        <id column="id" property="id" />
+        <result column="city" property="city" />
+        <result column="num" property="num" />
+    </resultMap>
+
+    <!--根据名字查询集合对象-->
+    <select id="selectListByCity" resultMap="cityBaseMap" parameterType="java.lang.String" >
+        SELECT * FROM happiness WHERE city = #{city}
+    </select>
+
+</mapper>

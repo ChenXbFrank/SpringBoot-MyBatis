@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cxb.sbm.dao.HappinessDao">
+    <select id="findHappinessByCityXml" parameterType="String" resultType="com.cxb.sbm.model.Happiness">
+        SELECT * FROM happiness WHERE city = #{city}
+    </select>
+
+    <insert id="insertHappinessXml" parameterType="HashMap" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO happiness(city, num) VALUES(#{city}, #{num})
+    </insert>
+
+    <resultMap id="cityBaseMap" type="com.cxb.sbm.model.Happiness">
+        <id column="id" property="id" />
+        <result column="city" property="city" />
+        <result column="num" property="num" />
+    </resultMap>
+
+    <select id="selectListByCity" resultMap="cityBaseMap" parameterType="java.lang.String" >
+        SELECT * FROM happiness WHERE city = #{city}
+    </select>
+
+</mapper>
